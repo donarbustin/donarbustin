@@ -1,9 +1,20 @@
-PATINER — prototipo web jugable
+DONARBUSTIN GAMING — FORMULARIO DE SORTEO
 
-Archivos: index.html (juego en un único archivo).
+Contenido: index.html con el formulario integrado en la web y el juego KUKIRIN G2 que ya existía en el archivo de origen.
 
-Probar: extrae el ZIP y abre index.html en Chrome/Edge. En Android, súbelo a GitHub Pages o a tu alojamiento y abre la dirección desde Chrome. Usa los controles táctiles en pantalla; en ordenador también funcionan flechas y WASD.
+IMPORTANTE SOBRE EL CORREO
+El formulario usa FormSubmit para enviar inscripciones a sstreamadan@gmail.com. La primera vez, FormSubmit suele enviar un correo de activación a esa dirección. Abre ese mensaje y confirma el servicio antes de anunciar el formulario. Comprueba también spam. No se incluye ninguna contraseña ni clave secreta.
 
-Incluye: primera persona simulada con manillar y velocímetro; controles táctiles; modos ECO/SPORT/TURBO; tienda con KuKirin G2, G4, A1 y M4 Pro; monedas por distancia; mapas Ciudad, Montaña, Playa y Noche.
+CÓMO SUBIRLO SIN BORRAR OTROS ARCHIVOS
+1. Haz una copia de seguridad de tu index.html actual en GitHub.
+2. Abre el repositorio donarbustin y selecciona el archivo index.html.
+3. Usa Edit (lápiz) o Replace/upload según la opción que aparezca, y sustituye SOLO index.html por este archivo. No borres los demás archivos ni carpetas.
+4. Guarda con Commit changes.
+5. Espera unos minutos y abre https://donarbustin.github.io/donarbustin/ con Ctrl+F5.
+6. Haz una prueba real del formulario y verifica que llega un correo a sstreamadan@gmail.com. No anuncies el sorteo hasta confirmar que el correo funciona y publicar unas bases completas.
 
-Limitaciones: perspectiva 2D simulada, no 3D completo. Precios/velocidades son ficticios, no especificaciones reales. Monedas no se guardan tras recargar. No incluye APK, cuentas, multijugador ni compras reales. No se ha probado en un teléfono físico.
+PRIVACIDAD Y SORTEO
+El formulario pide solo apodo y correo. Añade las bases reales antes de abrir la participación: premios concretos, fechas, requisitos, forma de elegir ganador, contacto y tratamiento de datos. Si eres menor de edad, pide a un adulto responsable que revise el formulario y las bases.
+
+NOTA
+No se puede garantizar la entrega de correos hasta activar y probar FormSubmit. El mensaje de éxito aparece solo si el servicio devuelve una respuesta de envío correcta.
