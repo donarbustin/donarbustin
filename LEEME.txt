@@ -1,8 +1,9 @@
-DONARBUSTIN GAMING — ACTUALIZACIÓN DE SORTEO Y SOLICITUD PRELIMINAR
+PATINER — prototipo web jugable
 
-1. Haz una copia de seguridad del index.html que ya tienes en GitHub.
-2. Sube el HTML de este paquete al repositorio con el nombre index.html (reemplaza solo ese archivo).
-3. No borres los demás archivos de la web: avatar_donarbustin.png, PDF del libro y cualquier otro recurso.
-4. El formulario del sorteo y el de solicitud preliminar envían los datos a sstreamadan@gmail.com mediante FormSubmit. La primera vez, puede ser necesario confirmar el correo de activación del servicio. Haz una prueba antes de anunciarlo.
-5. La solicitud de préstamo no aprueba préstamos ni transfiere dinero. No pidas contraseñas, PIN, tarjetas, claves ni números de cuenta en el formulario. Para gestionar préstamos reales, consulta a un adulto responsable y revisa las obligaciones legales y de privacidad.
-6. Los campos del sorteo tienen letra y contraste mejorados, y un tamaño de entrada más cómodo en móvil y ordenador.
+Archivos: index.html (juego en un único archivo).
+
+Probar: extrae el ZIP y abre index.html en Chrome/Edge. En Android, súbelo a GitHub Pages o a tu alojamiento y abre la dirección desde Chrome. Usa los controles táctiles en pantalla; en ordenador también funcionan flechas y WASD.
+
+Incluye: primera persona simulada con manillar y velocímetro; controles táctiles; modos ECO/SPORT/TURBO; tienda con KuKirin G2, G4, A1 y M4 Pro; monedas por distancia; mapas Ciudad, Montaña, Playa y Noche.
+
+Limitaciones: perspectiva 2D simulada, no 3D completo. Precios/velocidades son ficticios, no especificaciones reales. Monedas no se guardan tras recargar. No incluye APK, cuentas, multijugador ni compras reales. No se ha probado en un teléfono físico.
