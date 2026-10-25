@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SESCAM — Gestión médica privada (prototipo)</title>
+<style>
+:root{--navy:#083765;--blue:#1479c9;--light:#edf6ff;--line:#d4e4f4;--ink:#12365b;--muted:#607b97;--bg:#f5f9fd}
+*{box-sizing:border-box}body{margin:0;font-family:Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--ink)}
+.app{min-height:100vh;display:grid;grid-template-columns:245px 1fr}.side{background:linear-gradient(180deg,#0b477e,#062a50);color:white;padding:20px 14px;display:flex;flex-direction:column;gap:10px}
+.brand{display:flex;gap:12px;align-items:center;padding:8px 8px 22px;border-bottom:1px solid #ffffff33;margin-bottom:8px}.logo{width:44px;height:44px;border-radius:12px;background:#fff;color:#1265a8;display:grid;place-items:center;font-size:27px;font-weight:800}.brand h1{font-size:22px;margin:0}.brand small{color:#cce4f9}
+.nav{border:0;background:transparent;color:#eaf5ff;text-align:left;padding:12px;border-radius:9px;font-size:14px;cursor:pointer}.nav:hover,.nav.active{background:#1676c5;color:white}.sidefoot{margin-top:auto;font-size:12px;color:#d3e6f7;line-height:1.5;padding:12px}
+main{min-width:0}.top{height:76px;background:white;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;padding:0 28px}.top strong{font-size:15px}.top small{display:block;color:var(--muted);margin-top:4px}.pill{border:1px solid var(--line);border-radius:99px;padding:8px 12px;color:#1767a6;font-size:12px;background:#f8fcff}
+.content{padding:24px;max-width:1500px;margin:auto}.hero{background:linear-gradient(110deg,#0c4c83,#2388cb);border-radius:15px;color:white;padding:25px 28px;display:flex;justify-content:space-between;align-items:center;gap:20px;box-shadow:0 8px 22px #1b65951c}.hero h2{font-size:26px;margin:0 0 7px}.hero p{margin:0;color:#e0f1ff}.hero .symbol{font-size:56px;opacity:.9}
+h3{margin:24px 0 13px;font-size:18px}.tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.tile{background:white;border:1px solid var(--line);border-radius:13px;padding:18px;cursor:pointer;min-height:132px;box-shadow:0 2px 6px #1b47700a}.tile:hover{border-color:#73b5ec;transform:translateY(-1px)}.tile .ico{font-size:25px;margin-bottom:12px}.tile b{display:block;margin-bottom:6px}.tile p{font-size:13px;color:var(--muted);margin:0;line-height:1.45}
+.panel{background:white;border:1px solid var(--line);border-radius:13px;padding:20px;margin-top:18px}.panel h2{margin:0 0 16px;font-size:22px}.muted{color:var(--muted);font-size:13px}.row{display:flex;gap:12px;flex-wrap:wrap}.field{display:flex;flex-direction:column;gap:6px;flex:1;min-width:180px;margin-bottom:12px}.field label{font-size:13px;font-weight:600}.field input,.field select,.field textarea{width:100%;border:1px solid #c9dcec;border-radius:8px;padding:11px;font:inherit;color:var(--ink);background:white}.field textarea{min-height:95px;resize:vertical}.btn{border:0;border-radius:8px;padding:10px 14px;background:var(--blue);color:white;font-weight:600;cursor:pointer}.btn.secondary{background:#eaf4fd;color:#145b93;border:1px solid var(--line)}.btn.danger{background:#a8333a}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}.tablewrap{overflow:auto}table{width:100%;border-collapse:collapse;font-size:13px}th,td{text-align:left;padding:11px;border-bottom:1px solid #e2edf7;vertical-align:top}th{background:#f3f8fd;color:#385e80}.empty{padding:24px;text-align:center;color:var(--muted)}.notice{border:1px solid #f0d6a1;background:#fff9e9;color:#775719;padding:12px 14px;border-radius:9px;font-size:13px;line-height:1.5;margin-top:14px}.hidden{display:none!important}.sectionhead{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}.sectionhead h2{margin:0}.search{max-width:300px}.docpreview{background:#fff;border:1px solid #cbd9e6;padding:28px;max-width:850px;min-height:300px;margin-top:16px}.docpreview h2{text-align:center}.small{font-size:12px}.login{position:fixed;inset:0;background:#062a50ed;display:grid;place-items:center;z-index:20;padding:20px}.loginbox{background:white;padding:28px;border-radius:16px;max-width:400px;width:100%}.loginbox h2{margin-top:0}.loginbox input{width:100%;padding:12px;border:1px solid var(--line);border-radius:8px;margin:8px 0 14px}
+@media(max-width:850px){.app{grid-template-columns:1fr}.side{position:static}.side nav{display:grid;grid-template-columns:repeat(2,1fr)}.sidefoot{display:none}.tiles{grid-template-columns:repeat(2,minmax(0,1fr))}.content{padding:14px}.top{padding:0 14px}}
+@media(max-width:540px){.tiles{grid-template-columns:1fr}.hero .symbol{display:none}.top{height:auto;padding:14px;gap:8px}.pill{display:none}}
+@media print{.side,.top,.no-print,.login{display:none!important}.app{display:block}.content{padding:0;max-width:none}.panel,.docpreview{border:0;box-shadow:none}.docpreview{max-width:none}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="side">
+ <div class="brand"><div class="logo">✚</div><div><h1>SESCAM</h1><small>Gestión médica · prototipo privado</small></div></div>
+ <nav id="nav">
+  <button class="nav active" data-page="inicio">⌂ &nbsp; Inicio</button>
+  <button class="nav" data-page="pacientes">♙ &nbsp; Pacientes</button>
+  <button class="nav" data-page="ambulancias">🚑 &nbsp; Ambulancias</button>
+  <button class="nav" data-page="informes">▤ &nbsp; Informes hospitalarios</button>
+  <button class="nav" data-page="recetas">💊 &nbsp; Recetas</button>
+  <button class="nav" data-page="formularios">☷ &nbsp; Formularios</button>
+  <button class="nav" data-page="documentos">▣ &nbsp; Documentos e impresión</button>
+  <button class="nav" data-page="ajustes">⚙ &nbsp; Configuración</button>
+ </nav>
+ <div class="sidefoot">Uso privado · Guarda los datos en este navegador.<br><b>No es una aplicación oficial del SESCAM.</b></div>
+</aside>
+<main>
+<header class="top"><div><strong id="welcome">Bienvenido/a</strong><small>Aplicación de escritorio local</small></div><span class="pill">🔒 Acceso local</span></header>
+<div class="content">
+<section id="page-inicio">
+ <div class="hero"><div><h2>SESCAM · Gestión médica</h2><p>Organiza fichas, solicitudes y documentos desde un único lugar.</p></div><div class="symbol">⚕</div></div>
+ <h3>Menú principal</h3>
+ <div class="tiles">
+  <div class="tile" data-go="pacientes"><div class="ico">♙</div><b>Pacientes</b><p>Crear fichas y consultar los registros guardados.</p></div>
+  <div class="tile" data-go="ambulancias"><div class="ico">🚑</div><b>Solicitudes de ambulancia</b><p>Preparar un formulario de solicitud o traslado.</p></div>
+  <div class="tile" data-go="informes"><div class="ico">▤</div><b>Informes hospitalarios</b><p>Redactar informes y derivaciones en borrador.</p></div>
+  <div class="tile" data-go="recetas"><div class="ico">💊</div><b>Recetas</b><p>Preparar borradores para revisión profesional.</p></div>
+  <div class="tile" data-go="formularios"><div class="ico">☷</div><b>Formularios personalizados</b><p>Crear formularios de notas y seguimiento.</p></div>
+  <div class="tile" data-go="documentos"><div class="ico">▣</div><b>Documentos e impresión</b><p>Consultar documentos, imprimir o guardar como PDF.</p></div>
+ </div>
+ <div class="notice"><b>Importante:</b> esta versión es un prototipo local. No envía ambulancias, no conecta con hospitales ni emite recetas oficiales. No introduzcas datos reales de salud hasta contar con almacenamiento y seguridad adecuados.</div>
+ <div class="panel"><div class="sectionhead"><h2>Resumen de actividad</h2><span class="muted">Registros de este navegador</span></div><div class="tiles" style="grid-template-columns:repeat(3,minmax(0,1fr));margin-top:12px"><div class="tile"><b id="count-p">0</b><p>Pacientes</p></div><div class="tile"><b id="count-a">0</b><p>Solicitudes de ambulancia</p></div><div class="tile"><b id="count-d">0</b><p>Documentos creados</p></div></div></div>
+</section>
+
+<section id="page-pacientes" class="hidden">
+ <div class="sectionhead"><h2>Pacientes</h2><input id="search-p" class="field search" placeholder="Buscar por nombre…" oninput="renderPatients()"></div>
+ <div class="panel"><h3 style="margin-top:0">Nueva ficha de paciente</h3><form id="patient-form"><div class="row">
+ <div class="field"><label>Nombre y apellidos *</label><input name="name" required></div><div class="field"><label>Edad</label><input name="age" type="number" min="0" max="130"></div>
+ <div class="field"><label>Identificador interno (opcional)</label><input name="id"></div></div><div class="row"><div class="field"><label>Motivo de consulta / síntomas</label><textarea name="symptoms"></textarea></div><div class="field"><label>Observaciones</label><textarea name="notes"></textarea></div></div><button class="btn">Guardar ficha</button></form></div>
+ <div class="panel"><h3 style="margin-top:0">Fichas guardadas</h3><div id="patients-list" class="tablewrap"></div></div>
+</section>
+
+<section id="page-ambulancias" class="hidden">
+ <h2>Solicitudes de ambulancia</h2><p class="muted">Formulario de preparación documental; no transmite avisos a emergencias.</p>
+ <div class="panel"><form id="ambulance-form"><div class="row"><div class="field"><label>Paciente *</label><input name="patient" required></div><div class="field"><label>Prioridad indicada</label><select name="priority"><option>Por valorar</option><option>Urgente</option><option>No urgente</option></select></div></div><div class="row"><div class="field"><label>Dirección / lugar de recogida</label><input name="address"></div><div class="field"><label>Destino</label><input name="destination" placeholder="Centro o destino propuesto"></div></div><div class="field"><label>Motivo y observaciones *</label><textarea name="reason" required></textarea></div><div class="actions"><button class="btn">Guardar solicitud</button><button type="button" class="btn secondary" onclick="newDocFrom('ambulance-form','Solicitud de ambulancia')">Preparar documento</button></div></form></div>
+ <div class="panel"><h3>Solicitudes guardadas</h3><div id="ambulances-list" class="tablewrap"></div></div>
+</section>
+
+<section id="page-informes" class="hidden">
+ <h2>Informes hospitalarios</h2><p class="muted">Redacción de borradores; deben revisarse y validarse por personal autorizado.</p>
+ <div class="panel"><form id="report-form"><div class="row"><div class="field"><label>Paciente *</label><input name="patient" required></div><div class="field"><label>Hospital / destino</label><input name="hospital"></div></div><div class="field"><label>Motivo de derivación</label><textarea name="reason"></textarea></div><div class="field"><label>Síntomas y evolución</label><textarea name="symptoms"></textarea></div><div class="field"><label>Antecedentes relevantes (si procede)</label><textarea name="history"></textarea></div><div class="field"><label>Exploración / datos observados</label><textarea name="exam"></textarea></div><div class="field"><label>Tratamiento y observaciones</label><textarea name="treatment"></textarea></div><div class="actions"><button class="btn">Guardar borrador</button><button type="button" class="btn secondary" onclick="newDocFrom('report-form','Informe hospitalario')">Preparar documento</button></div></form></div>
+ <div class="panel"><h3>Informes guardados</h3><div id="reports-list" class="tablewrap"></div></div>
+</section>
+
+<section id="page-recetas" class="hidden">
+ <h2>Borradores de receta</h2><p class="muted">No constituye una receta oficial ni una autorización para dispensación.</p>
+ <div class="panel"><form id="prescription-form"><div class="row"><div class="field"><label>Paciente *</label><input name="patient" required></div><div class="field"><label>Medicamento (borrador) *</label><input name="medicine" required></div></div><div class="row"><div class="field"><label>Dosis indicada por profesional</label><input name="dose"></div><div class="field"><label>Frecuencia</label><input name="frequency"></div><div class="field"><label>Duración</label><input name="duration"></div></div><div class="field"><label>Notas para revisión</label><textarea name="notes"></textarea></div><div class="actions"><button class="btn">Guardar borrador</button><button type="button" class="btn secondary" onclick="newDocFrom('prescription-form','Borrador de receta')">Preparar documento</button></div></form></div>
+ <div class="panel"><h3>Borradores guardados</h3><div id="prescriptions-list" class="tablewrap"></div></div>
+</section>
+
+<section id="page-formularios" class="hidden">
+ <h2>Formularios personalizados</h2><p class="muted">Crea un formulario sencillo para notas internas o seguimiento.</p>
+ <div class="panel"><form id="custom-form"><div class="field"><label>Nombre del formulario *</label><input name="title" required placeholder="Ej. Seguimiento de consulta"></div><div class="field"><label>Campos o preguntas (uno por línea) *</label><textarea name="fields" required placeholder="Fecha de seguimiento&#10;Observaciones&#10;Próxima revisión"></textarea></div><button class="btn">Guardar formulario</button></form></div>
+ <div class="panel"><h3>Formularios creados</h3><div id="custom-list" class="tablewrap"></div></div>
+</section>
+
+<section id="page-documentos" class="hidden">
+ <div class="sectionhead"><h2>Documentos e impresión</h2><button class="btn secondary" onclick="window.print()">🖨 Imprimir / guardar PDF</button></div>
+ <p class="muted">Selecciona un documento guardado para verlo, imprimirlo o descargar una copia editable en HTML.</p>
+ <div class="panel"><div id="documents-list" class="tablewrap"></div></div>
+ <div class="panel"><h3>Vista previa del documento</h3><div id="doc-preview" class="docpreview"><p class="muted">Selecciona “Ver” en un documento para mostrarlo aquí.</p></div><div class="actions no-print"><button class="btn" onclick="window.print()">Imprimir / guardar como PDF</button><button class="btn secondary" onclick="downloadCurrent()">Descargar editable (.html)</button></div></div>
+</section>
+
+<section id="page-ajustes" class="hidden">
+ <h2>Configuración</h2>
+ <div class="panel"><h3 style="margin-top:0">Perfil de la aplicación</h3><form id="settings-form"><div class="field"><label>Nombre visible del usuario</label><input name="user" placeholder="Usuario"></div><button class="btn">Guardar preferencias</button></form></div>
+ <div class="panel"><h3>Copias de seguridad</h3><p class="muted">Exporta los registros guardados en este navegador a un archivo JSON. Guárdalo en un lugar seguro.</p><div class="actions"><button class="btn" onclick="exportBackup()">Exportar copia de seguridad</button><label class="btn secondary" for="import-file">Importar copia JSON</label><input id="import-file" type="file" accept=".json,application/json" class="hidden" onchange="importBackup(event)"></div><div class="notice">Los datos se guardan en el almacenamiento local del navegador y no están cifrados por esta aplicación. No uses datos médicos reales en este prototipo. Una contraseña visual no sustituye el cifrado ni una solución clínica autorizada.</div></div>
+ <div class="panel"><h3>Privacidad y uso</h3><p>Este proyecto es un prototipo independiente, no oficial y sin conexión con los sistemas del Servicio de Salud de Castilla-La Mancha. Los documentos generados son borradores y deben ser revisados por profesionales autorizados.</p><button class="btn danger" onclick="clearAll()">Borrar todos los datos locales</button></div>
+</section>
+</div></main></div>
+<script>
+const KEY='sescamPrototypeDataV1';
+let data=load(), currentDoc=null;
+function load(){try{return JSON.parse(localStorage.getItem(KEY))||{patients:[],ambulances:[],reports:[],prescriptions:[],custom:[],docs:[],settings:{user:'Usuario'}}}catch(e){return {patients:[],ambulances:[],reports:[],prescriptions:[],custom:[],docs:[],settings:{user:'Usuario'}}}}
+function save(){localStorage.setItem(KEY,JSON.stringify(data));updateCounts();renderAll()}
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function val(form){return Object.fromEntries(new FormData(form).entries())}
+function date(){return new Date().toLocaleString('es-ES')}
+function nav(page){document.querySelectorAll('[id^="page-"]').forEach(s=>s.classList.add('hidden'));document.getElementById('page-'+page).classList.remove('hidden');document.querySelectorAll('.nav').forEach(b=>b.classList.toggle('active',b.dataset.page===page));if(page==='documentos')renderDocs();window.scrollTo(0,0)}
+document.querySelectorAll('.nav').forEach(b=>b.onclick=()=>nav(b.dataset.page));document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>nav(b.dataset.go));
+function addDoc(type,record){const doc={id:Date.now()+Math.random(),type,title:type+' — '+(record.patient||record.name||record.title||date()),date:date(),record};data.docs.unshift(doc);currentDoc=doc.id;save();nav('documentos');showDoc(doc.id)}
+function table(items,fields,kind){if(!items.length)return '<div class="empty">Todavía no hay registros.</div>';return '<table><thead><tr>'+fields.map(f=>'<th>'+esc(f[1])+'</th>').join('')+'<th>Acciones</th></tr></thead><tbody>'+items.map((x,i)=>'<tr>'+fields.map(f=>'<td>'+esc(x[f[0]]||'—')+'</td>').join('')+'<td><button class="btn secondary" onclick="makeDoc(\\''+kind+'\\','+i+')">Documento</button> <button class="btn danger" onclick="removeItem(\\''+kind+'\\','+i+')">Borrar</button></td></tr>').join('')+'</tbody></table>'}
+function renderPatients(){let q=(document.getElementById('search-p')?.value||'').toLowerCase();let arr=data.patients.filter(x=>x.name.toLowerCase().includes(q));document.getElementById('patients-list').innerHTML=table(arr,[['name','Nombre'],['age','Edad'],['id','ID interno'],['symptoms','Motivo / síntomas'],['date','Creado']],'patients')}
+function renderAll(){renderPatients();document.getElementById('ambulances-list').innerHTML=table(data.ambulances,[['patient','Paciente'],['priority','Prioridad'],['destination','Destino'],['reason','Motivo'],['date','Fecha']],'ambulances');document.getElementById('reports-list').innerHTML=table(data.reports,[['patient','Paciente'],['hospital','Destino'],['reason','Motivo'],['date','Fecha']],'reports');document.getElementById('prescriptions-list').innerHTML=table(data.prescriptions,[['patient','Paciente'],['medicine','Medicamento'],['dose','Dosis'],['date','Fecha']],'prescriptions');document.getElementById('custom-list').innerHTML=table(data.custom,[['title','Formulario'],['fields','Campos'],['date','Fecha']],'custom');renderDocs()}
+function updateCounts(){document.getElementById('count-p').textContent=data.patients.length;document.getElementById('count-a').textContent=data.ambulances.length;document.getElementById('count-d').textContent=data.docs.length;document.getElementById('welcome').textContent='Bienvenido/a, '+(data.settings.user||'Usuario')}
+document.getElementById('patient-form').onsubmit=e=>{e.preventDefault();let r=val(e.target);r.date=date();data.patients.unshift(r);e.target.reset();save();alert('Ficha guardada en este navegador.');};
+document.getElementById('ambulance-form').onsubmit=e=>{e.preventDefault();let r=val(e.target);r.date=date();data.ambulances.unshift(r);e.target.reset();addDoc('Solicitud de ambulancia',r);};
+document.getElementById('report-form').onsubmit=e=>{e.preventDefault();let r=val(e.target);r.date=date();data.reports.unshift(r);e.target.reset();addDoc('Informe hospitalario (borrador)',r);};
+document.getElementById('prescription-form').onsubmit=e=>{e.preventDefault();let r=val(e.target);r.date=date();data.prescriptions.unshift(r);e.target.reset();addDoc('Borrador de receta',r);};
+document.getElementById('custom-form').onsubmit=e=>{e.preventDefault();let r=val(e.target);r.date=date();data.custom.unshift(r);e.target.reset();save();alert('Formulario guardado. Esta versión almacena la definición, no genera un formulario clínico oficial.');};
+document.getElementById('settings-form').onsubmit=e=>{e.preventDefault();data.settings.user=val(e.target).user||'Usuario';save();alert('Preferencias guardadas.');};
+function newDocFrom(formId,type){let r=val(document.getElementById(formId));if(!Object.values(r).some(v=>String(v).trim())){alert('Rellena primero el formulario.');return}r.date=date();addDoc(type,r)}
+function makeDoc(kind,i){let map={patients:data.patients,ambulances:data.ambulances,reports:data.reports,prescriptions:data.prescriptions,custom:data.custom};let type={patients:'Ficha de paciente',ambulances:'Solicitud de ambulancia',reports:'Informe hospitalario (borrador)',prescriptions:'Borrador de receta',custom:'Formulario personalizado'}[kind];addDoc(type,map[kind][i])}
+function removeItem(kind,i){if(!confirm('¿Borrar este registro?'))return;data[kind].splice(i,1);save()}
+function renderDocs(){let el=document.getElementById('documents-list');if(!el)return;if(!data.docs.length){el.innerHTML='<div class="empty">No hay documentos todavía. Crea uno desde alguno de los formularios.</div>';return}el.innerHTML='<table><thead><tr><th>Documento</th><th>Fecha</th><th>Acciones</th></tr></thead><tbody>'+data.docs.map(d=>'<tr><td>'+esc(d.title)+'</td><td>'+esc(d.date)+'</td><td><button class="btn secondary" onclick="showDoc('+d.id+')">Ver</button> <button class="btn secondary" onclick="downloadDoc('+d.id+')">Descargar editable</button> <button class="btn danger" onclick="deleteDoc('+d.id+')">Borrar</button></td></tr>').join('')+'</tbody></table>'}
+function docHtml(d){let r=d.record;return '<h2>SESCAM · '+esc(d.type)+'</h2><p style="text-align:center">Documento de trabajo · Prototipo privado no oficial</p><hr><p><b>Fecha de creación:</b> '+esc(d.date)+'</p>'+Object.entries(r).map(([k,v])=>'<p><b>'+esc(({name:'Nombre y apellidos',age:'Edad',id:'ID interno',patient:'Paciente',priority:'Prioridad',address:'Lugar de recogida',destination:'Destino',reason:'Motivo',symptoms:'Síntomas y evolución',history:'Antecedentes',exam:'Exploración',treatment:'Tratamiento y observaciones',hospital:'Hospital / destino',medicine:'Medicamento',dose:'Dosis',frequency:'Frecuencia',duration:'Duración',notes:'Observaciones',title:'Nombre del formulario',fields:'Campos del formulario',date:'Fecha'}[k]||k))+':</b><br>'+esc(v).replace(/\n/g,'<br>')+'</p>').join('')+'<hr><p class="small">Borrador: debe ser revisado y validado por personal autorizado. No es una receta oficial ni una solicitud transmitida a servicios de emergencias.</p>'}
+function showDoc(id){let d=data.docs.find(x=>x.id===id);if(!d)return;currentDoc=id;document.getElementById('doc-preview').innerHTML=docHtml(d)}
+function downloadDoc(id){let d=data.docs.find(x=>x.id===id);if(d)downloadBlob('<!doctype html><html lang="es"><meta charset="utf-8"><title>'+esc(d.title)+'</title><body style="font-family:Arial;max-width:850px;margin:40px auto;line-height:1.5">'+docHtml(d)+'</body></html>',(d.title||'documento').replace(/[^a-z0-9áéíóúñ -]/gi,'')+'.html','text/html')}
+function downloadCurrent(){if(currentDoc)downloadDoc(currentDoc);else alert('Selecciona un documento primero.')}
+function downloadBlob(content,name,type){let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([content],{type}));a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
+function exportBackup(){downloadBlob(JSON.stringify(data,null,2),'sescam-copia-seguridad.json','application/json')}
+function importBackup(e){let f=e.target.files[0];if(!f)return;let rd=new FileReader();rd.onload=()=>{try{let d=JSON.parse(rd.result);if(!d.patients||!d.docs)throw Error();if(confirm('¿Reemplazar los datos actuales con esta copia?')){data=d;save();alert('Copia importada.')}}catch(err){alert('El archivo no parece una copia válida de SESCAM.')}e.target.value=''};rd.readAsText(f)}
+function deleteDoc(id){if(confirm('¿Borrar este documento?')){data.docs=data.docs.filter(d=>d.id!==id);if(currentDoc===id)currentDoc=null;save();document.getElementById('doc-preview').innerHTML='<p class="muted">Selecciona un documento para verlo.</p>'}}
+function clearAll(){if(confirm('¿Seguro que quieres borrar todos los registros guardados en este navegador? Esta acción no se puede deshacer.')){localStorage.removeItem(KEY);data=load();currentDoc=null;save();document.getElementById('doc-preview').innerHTML='<p class="muted">Selecciona un documento para verlo.</p>'}}
+updateCounts();renderAll();
+</script>
+</body></html>
